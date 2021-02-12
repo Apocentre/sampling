@@ -9,13 +9,13 @@
  * @param {Array} the probabilities.
  * @param {Array} the outcomes. Index is assumed as outcome if not provided.
  */
-function Sample(probabilities, outcomes) {
+function Sample(probabilities, outcomes, rng) {
   'use strict';
 
   this.alias = [];
   this.prob  = [];
   this.outcomes = outcomes || this.indexedOutcomes(probabilities.length);
-
+  this.rng = rng || Math.random
   this.precomputeAlias(probabilities);
 }
 
@@ -35,8 +35,8 @@ Sample.prototype.next = function (numOfSamples) {
       i   = 0;
 
   do {
-    var c = this.randomInt(0, this.prob.length);
-    out[i] = this.outcomes[(Math.random() < this.prob[c]) ? c : this.alias[c]];
+    var c = Math.floor(this.rng() * this.prob.length);
+    out[i] = this.outcomes[(this.rng() < this.prob[c]) ? c : this.alias[c]];
   } while (++i < n);
 
   return (n > 1) ? out : out[0];
@@ -118,11 +118,11 @@ Sample.prototype.indexedOutcomes = function (n) {
 Sample.prototype.randomInt = function (min, max) {
   'use strict';
 
-  return Math.floor(Math.random() * (max - min)) + min;
+  return Math.floor(this.rng() * (max - min)) + min;
 };
 
-module.exports = function (probabilities, outcomes) {
+module.exports = function (probabilities, outcomes, rng) {
   'use strict';
 
-  return new Sample(probabilities, outcomes);
+  return new Sample(probabilities, outcomes, rng);
 };
