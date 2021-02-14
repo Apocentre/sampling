@@ -21,6 +21,12 @@ var s = sample([0.5, 0.25, 0.25]);
 s.next(); // => random index according to specified probabilities
 ```
 
+```javascript
+var rand = Math.rand; // custom random generator function
+var s = sample([0.5, 0.25, 0.25], null, rand);
+s.next(); // => random index according to specified probabilities
+```
+
 * * * *
 
 Have fun!
