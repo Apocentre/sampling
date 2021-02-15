@@ -2,7 +2,11 @@
 
 Library for sampling of random values from a discrete probability distribution, using the Walker-Vose alias method.
 
-[![NPM](https://nodei.co/npm/alias-sampling.png?mini=true)](https://nodei.co/npm/alias-sampling/)
+## Installation
+
+```shell script
+yarn add @apocentre/aliasing
+```
 
 ## Usage
 
